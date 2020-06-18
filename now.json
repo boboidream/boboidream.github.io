@@ -1,11 +1,1 @@
-{
-  "version": 2,
-  "alias": ["wenboz.com","www.wenboz.com"],
-  "routes": [
-    {
-      "src": "https://wenboz.com/(.*)",
-      "status": 301,
-      "headers": { "Location": "https://www.wenboz.com/$1" }
-    }
-  ]
-}
+{"version":2,"alias":["wenboz.com","www.wenboz.com"],"routes":[{"src":"https://wenboz.com/(.*)","status":301,"headers":{"Location":"https://www.wenboz.com/$1"}}]}

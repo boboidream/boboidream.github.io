@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="[&quot;一肩月光&quot;,&quot;前端&quot;,&quot;javascript&quot;]"><title>使用 VPS 让 Hexo 博客快的飞起 | 一肩月光</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + '17a4a7561f87f5a657fc4175aaced019';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+  </script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">使用 VPS 让 Hexo 博客快的飞起</h1><a id="logo" href="/.">一肩月光</a><p class="description">记录，为清醒的活着。</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/work/"><i class="fa fa-leaf"> work</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">使用 VPS 让 Hexo 博客快的飞起</h1><div class="post-meta">Aug 9, 2018<span> | </span><span class="category"><a href="/categories/网站建设/">网站建设</a></span><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><p><img src="../img/2018-08-09-0.jpeg" alt="warm"></p>
+<p>给 Hexo 提速是个费力的事。多么良心 GitHub 国内已阉成龟速，心疼开发者一秒。</p>
+<p>给 Hexo 提速方案有哪些？从最省钱的说吧。</p>
+<ol>
+<li>用 <code>hexo-neat</code> 或 <code>hexo-all-minifier</code> 等插件压缩 <code>js/css/html/images</code> 等文件。</li>
+<li>采用图床，例如：<a href="https://jiantuku.com/" target="_blank" rel="noopener">极简图床</a> 、七牛、又拍云等。</li>
+<li>CDN 加速，这个通常要收费。</li>
+<li>国内走 Coding.net，分流加速。</li>
+<li>VPS 直接访问自己服务器。</li>
+</ol>
+<p>压缩静态文件会大大增加 <code>hexo g</code> 生成博客时间，假如有 VPS 把这工作交给服务器倒是不错的选择。不知阿里云的 code.aliyun.com 里自动化工具能否实现免 VPS 自动化。但这也有个问题，生成工作给了服务器，如果执行过程出错怎么办？还得有报错机制，感觉复杂了。</p>
+<p>图床为图片加速是不错的选择，我就用七牛的加速，只需在图片前加个前缀，就能实现 CDN，赞一个！</p>
+<p>CDN 加速，似乎腾迅云有活动，半年免费。但毕竟收费的服务，而且不知 CDN 缓存问题是否已解决。</p>
+<p>Coding.net 是会员才能自定义域名？不考虑了。</p>
+<p>对，本文重点是有 VPS 的同学，自己动手丰衣足食。这个方案还一举解决了 <code>GitHub Pages</code> 不被百度收录的问题，爬虫被拒了。在国内用百度的人还是很可观的哇。</p>
+<hr>
+<p>简单讲下思路吧，毕竟很多前辈们已讲的够清楚了。</p>
+<ol>
+<li>在 VPS 上建 <code>bare</code> 类型 Git 仓库，用作 Hexo 提交的一个远程 Repo。例如：<code>/var/repo/zwb.io.git</code></li>
+<li>给自己网站建个文件夹。例如：<code>/var/www/zwb.io</code></li>
+<li>修改 <code>Nginx</code> 配 <code>Server</code> 指向网站目录。</li>
+<li>配 git 钩子 <code>post-receive</code>，本地 <code>push</code> 上来后，同步到网站目录 <code>/var/www/zwb.io</code></li>
+<li>新建个 git 用户，把 Repo 与网站目录都给其权限，同时给 <code>post-receive</code> 可执行权限。</li>
+<li>配置 VPS ssh 与本地 ssh 通信。</li>
+<li>本地 <code>_config</code> 里 <code>deploy</code> 添加自己 VPS repo 地址。</li>
+<li>域名解析，指向 VPS IP。</li>
+</ol>
+<ul>
+<li><p>把用到的命令，简单的写下吧</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir /var/repo</span><br><span class="line">git init --bare /var/repo/zwb.io.git</span><br><span class="line"></span><br><span class="line">mkdir /var/www/</span><br><span class="line">mkdir /var/www/zwb.io</span><br><span class="line"></span><br><span class="line">whereis nginx</span><br><span class="line">vim nginx.conf</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">listen       80 default_server;</span><br><span class="line">server_name  zwb.io wenboz.com;</span><br><span class="line">root         /var/www/zwb.io;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>vim /var/repo/zwb.io.git/hooks/post-receive</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">git --work-tree=/var/www/zwb.io --git-dir=/var/repo/zwb.io.git checkout -f</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<pre><code>`chmod +x /var/repo/zwb.io.git/hooks/post-receive`
+</code></pre><ul>
+<li><p>创建 git user，并赋权限</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useradd -d /home/git -m git</span><br><span class="line">sudo chown git:git /var/www/zwb.io</span><br><span class="line">sudo chown git:git /var/repo/zwb.io.git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置 ssh-key</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -f ~/.ssh/id_rsa_vps -C <span class="string">"yourmail@xxx.com"</span></span><br><span class="line">cat ~/.ssh/id_rsa_vps.pub</span><br><span class="line"></span><br><span class="line">vim ~/.ssh/config</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># two</span><br><span class="line">Host test.com</span><br><span class="line">HostName yourIp </span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/id_rsa_vps</span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 本地 cat ~/.ssh/id_rsa_vps.pub 复制到VPS ~/.ssh/authorized_keys</span></span><br><span class="line">vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RSAAuthentication yes</span><br><span class="line">PubkeyAuthentication yes</span><br><span class="line">AuthorizedKeysFile      .ssh/authorized_keys</span><br><span class="line">PermitRootLogin yes # 允许 root 用户 SSH 登陆</span><br><span class="line">PasswordAuthentication no # 禁用密码登陆</span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chmod 700 ~/.ssh</span><br><span class="line">chmod 600 ~/.ssh/authorized_keys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启服务</span></span><br><span class="line">service sshd restart</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑 <code>_config</code>，参考：<a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+</li>
+<li>最后，改下域名指向，完成。</li>
+</ul>
+<hr>
+<p><strong>看成果？<a href="http://wenboz.com" target="_blank" rel="noopener">http://wenboz.com</a></strong></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.swiftyper.com/2016/04/17/deploy-hexo-with-git-hook/" target="_blank" rel="noopener">使用 Git Hook 自动部署 Hexo 到个人 VPS</a><br><a href="https://yanzai.me/hexo-git-deploy.html" target="_blank" rel="noopener">Hexo的Git部署，一行命令部署到GitHub和自己的VPS</a><br><a href="https://segmentfault.com/a/1190000010680022" target="_blank" rel="noopener">Hexo 个人博客部署到 CentOS 个人服务器</a><br><a href="https://segmentfault.com/a/1190000007530568" target="_blank" rel="noopener">linux下ssh公钥验证的设置和远程登录</a><br><a href="http://zwb.io/p/53b8.html" target="_blank" rel="noopener">一台电脑绑定两个github帐号教程</a><br><a href="http://www.phpworld.cn/system/nginx/26.html" target="_blank" rel="noopener">CentOS-6.9 安装 Nginx</a></p>
+</div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>一肩月光</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/p/6612.html">https://www.wenboz.com/p/6612.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</li></ul></div><br><div class="tags"><a href="/tags/Hexo/">Hexo</a></div><div class="post-nav"><a class="pre" href="/p/a445.html">Hexo 中插入图片新姿式</a><a class="next" href="/p/93c5.html">推荐两个 Hexo 插件：短地址与封面模式</a></div><div id="lv-container" data-id="city" data-uid="MTAyMC80MTU1Ny8xODEwNA=="><script>(function(d, s) {
+   var j, e = d.getElementsByTagName(s)[0];
+   if (typeof LivereTower === 'function') { return; }
+   j = d.createElement(s);
+   j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+   j.async = true;
+   e.parentNode.insertBefore(j, e);
+})(document, 'script');
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/个人项目/">个人项目</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/健身/">健身</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/最优解/">最优解</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电影/">电影</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网站建设/">网站建设</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件/">软件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/追梦/" style="font-size: 15px;">追梦</a> <a href="/tags/好友/" style="font-size: 15px;">好友</a> <a href="/tags/生活方式/" style="font-size: 15px;">生活方式</a> <a href="/tags/重庆/" style="font-size: 15px;">重庆</a> <a href="/tags/健康/" style="font-size: 15px;">健康</a> <a href="/tags/日本/" style="font-size: 15px;">日本</a> <a href="/tags/五笔/" style="font-size: 15px;">五笔</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/老罗/" style="font-size: 15px;">老罗</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 15px;">正则表达式</a> <a href="/tags/深圳/" style="font-size: 15px;">深圳</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/游戏/" style="font-size: 15px;">游戏</a> <a href="/tags/路由器/" style="font-size: 15px;">路由器</a> <a href="/tags/Rails/" style="font-size: 15px;">Rails</a> <a href="/tags/游泳/" style="font-size: 15px;">游泳</a> <a href="/tags/电影/" style="font-size: 15px;">电影</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Atom/" style="font-size: 15px;">Atom</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/木心/" style="font-size: 15px;">木心</a> <a href="/tags/下载/" style="font-size: 15px;">下载</a> <a href="/tags/年记/" style="font-size: 15px;">年记</a> <a href="/tags/爬虫/" style="font-size: 15px;">爬虫</a> <a href="/tags/VuePress/" style="font-size: 15px;">VuePress</a> <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/西宁onLine/" style="font-size: 15px;">西宁onLine</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://blog.21w.space" title="贰十一万" target="_blank">贰十一万</a><ul></ul><a href="http://tengblog.com/" title="马腾的博客" target="_blank">马腾的博客</a><ul></ul><a href="http://cyang.tech/" title="cyang's blog" target="_blank">cyang's blog</a><ul></ul><a href="https://blog.helbing.cn/" title="helbing's blog" target="_blank">helbing's blog</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">一肩月光.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script>(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://s95.cnzz.com/z_stat.php?id=1260247646&web_id=1260247646";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

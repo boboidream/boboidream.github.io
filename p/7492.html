@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="[&quot;一肩月光&quot;,&quot;前端&quot;,&quot;javascript&quot;]"><title>H97M-D3H 安装 High Sierra 10.13 &amp; Win10 双系统 | 一肩月光</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + '17a4a7561f87f5a657fc4175aaced019';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+  </script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">H97M-D3H 安装 High Sierra 10.13 &amp; Win10 双系统</h1><a id="logo" href="/.">一肩月光</a><p class="description">记录，为清醒的活着。</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/work/"><i class="fa fa-leaf"> work</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">H97M-D3H 安装 High Sierra 10.13 &amp; Win10 双系统</h1><div class="post-meta">May 12, 2018<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><p><img src="/img/2018-05-14-0.jpg" alt="Type"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cpu	E3-1231</span><br><span class="line">显卡	GTX-750Ti</span><br><span class="line">主板	H97M-D3H</span><br></pre></td></tr></table></figure>
+<p>思路：目标是用 Clover 启动器，分别引导 macOS 与 Win10 系统。首先，制作 High Sierra 10.13 安装 U 盘，安装，最后将 Clover 启动器安至硬盘；下载 Win10，另一 U 盘制作「微PE」启动盘，安装 Win10 系统，结束。详细步骤：</p>
+<h2 id="一、制作启动-U-盘"><a href="#一、制作启动-U-盘" class="headerlink" title="一、制作启动 U 盘"></a>一、制作启动 U 盘</h2><ol>
+<li>到 Apple Store 下载 macOS High Sierra 系统</li>
+<li>将 U 盘格式化为 Mac OS 扩展(日志式)</li>
+<li>下载最新版本 <a href="https://www.tonymacx86.com/resources/categories/tonymacx86-downloads.3/" target="_blank" rel="noopener">UniBeast</a> 按引导安制作安装盘。</li>
+<li>替换安装盘 EFI 的 Clover 文件夹。下载文中 EFI 文件 <a href="https://www.insanelymac.com/forum/topic/322164-guide-sierra-high-sierra-on-gigabyte-ga-h97m-d3h-dsdt/" target="_blank" rel="noopener">Sierra / High Sierra on Gigabyte GA-H97M-D3H / DSDT</a></li>
+</ol>
+<h2 id="二、设置-BOIS"><a href="#二、设置-BOIS" class="headerlink" title="二、设置 BOIS"></a>二、设置 BOIS</h2><p>Disable vt-d<br>SATA mode: AHCI<br>OS Selection: Other OS</p>
+<h2 id="三、安装"><a href="#三、安装" class="headerlink" title="三、安装"></a>三、安装</h2><p>插上 U 盘，按 F12 选择从 U 盘进入系统。进入 macOS 安装。</p>
+<h2 id="四、优化"><a href="#四、优化" class="headerlink" title="四、优化"></a>四、优化</h2><ol>
+<li>安装显卡驱动 <a href="https://www.insanelymac.com/forum/topic/324195-nvidia-web-driver-updates-for-macos-high-sierra-update-04252018/" target="_blank" rel="noopener">web driver</a></li>
+<li>安装 <a href="https://www.insanelymac.com/forum/topic/302795-cuda-387178-is-out-update-04022018/" target="_blank" rel="noopener">CUDA</a></li>
+<li>下载 <a href="https://mackie100projects.altervista.org/download-clover-configurator/" target="_blank" rel="noopener">Clover Configurato</a> 用于挂载 EFI 分区，调整 Clover config.plist 文件。</li>
+<li>电源管理 Use “plugin﻿-type﻿﻿﻿﻿﻿“﻿=1 in D﻿SDT, SSDT or Clover config.plist。按教程生成 SSDT 放入 Clover，优化变频。</li>
+<li>CLOVER 屏蔽多余入口， Scan Legecy 取消勾选</li>
+<li>CLOVER 隐藏 clover 选择界面，设置 boot time=0</li>
+<li>解决开机扁苹果问题，可启动至 BOIS，将 OS Selection 设置为 Windows 8 WHQL，关闭安全启动。222</li>
+</ol>
+<h2 id="五、安装-Clover-到硬盘"><a href="#五、安装-Clover-到硬盘" class="headerlink" title="五、安装 Clover 到硬盘"></a>五、安装 Clover 到硬盘</h2><p>1.下载 <a href="https://sourceforge.net/projects/cloverefiboot/files/Installer/" target="_blank" rel="noopener">clover</a></p>
+<ol start="2">
+<li>安装到 macOS 所在硬盘，仅勾选 UEFI 启动器。</li>
+<li>替换优化好的 Clover 文件夹</li>
+</ol>
+<hr>
+<h2 id="六、安装-Windows"><a href="#六、安装-Windows" class="headerlink" title="六、安装 Windows"></a>六、安装 Windows</h2><ol>
+<li><p>下载系统<br><a href="https://msdn.itellyou.cn" target="_blank" rel="noopener">itellyou</a></p>
+</li>
+<li><p>制作 PE U 盘<br><a href="http://www.wepe.com.cn/download.html" target="_blank" rel="noopener">微 PE 官网</a></p>
+</li>
+</ol>
+<p>良心软件，强烈推荐。关于装机的工具一应俱全，从分区到修改 uefi，一条龙服务就是这么舒服。</p>
+<ol start="3">
+<li><a href="https://www.chuyu.me/zh-Hans/Document.html?file=Best/%E4%BD%BF%E7%94%A8Dism++%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F.md" target="_blank" rel="noopener">使用 Dism++ 释放镜像</a></li>
+</ol>
+<h2 id="七、感受"><a href="#七、感受" class="headerlink" title="七、感受"></a>七、感受</h2><p>时代进步，工具革新，装机体验美好太多。找到主版合适的 config.plist，本次装黑苹果完全没有卡壳。三卡完美，新版 Clover 不装显卡驱动也不会循环重启。win10 体验也提升很多，字体渲染在高清屏下润些。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.tonymacx86.com/threads/guide-sierra-10-12-2-ga-h97m-d3h-intel-i3-4330-nvidia-gtx750ti.211145/" target="_blank" rel="noopener">Sierra 10.12.2, GA-H97M-D3H, Intel i3 4330, nVidia GTX750ti</a></p>
+</div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>一肩月光</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/p/7492.html">https://www.wenboz.com/p/7492.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</li></ul></div><br><div class="tags"><a href="/tags/Mac/">Mac</a></div><div class="post-nav"><a class="pre" href="/p/ca4f.html">五笔美</a><a class="next" href="/p/ec7c.html">购买域名经验</a></div><div id="lv-container" data-id="city" data-uid="MTAyMC80MTU1Ny8xODEwNA=="><script>(function(d, s) {
+   var j, e = d.getElementsByTagName(s)[0];
+   if (typeof LivereTower === 'function') { return; }
+   j = d.createElement(s);
+   j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+   j.async = true;
+   e.parentNode.insertBefore(j, e);
+})(document, 'script');
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/个人项目/">个人项目</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/健身/">健身</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/最优解/">最优解</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电影/">电影</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网站建设/">网站建设</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件/">软件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/追梦/" style="font-size: 15px;">追梦</a> <a href="/tags/好友/" style="font-size: 15px;">好友</a> <a href="/tags/生活方式/" style="font-size: 15px;">生活方式</a> <a href="/tags/重庆/" style="font-size: 15px;">重庆</a> <a href="/tags/健康/" style="font-size: 15px;">健康</a> <a href="/tags/日本/" style="font-size: 15px;">日本</a> <a href="/tags/五笔/" style="font-size: 15px;">五笔</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/老罗/" style="font-size: 15px;">老罗</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 15px;">正则表达式</a> <a href="/tags/深圳/" style="font-size: 15px;">深圳</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/游戏/" style="font-size: 15px;">游戏</a> <a href="/tags/路由器/" style="font-size: 15px;">路由器</a> <a href="/tags/Rails/" style="font-size: 15px;">Rails</a> <a href="/tags/游泳/" style="font-size: 15px;">游泳</a> <a href="/tags/电影/" style="font-size: 15px;">电影</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Atom/" style="font-size: 15px;">Atom</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/木心/" style="font-size: 15px;">木心</a> <a href="/tags/下载/" style="font-size: 15px;">下载</a> <a href="/tags/年记/" style="font-size: 15px;">年记</a> <a href="/tags/爬虫/" style="font-size: 15px;">爬虫</a> <a href="/tags/VuePress/" style="font-size: 15px;">VuePress</a> <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/西宁onLine/" style="font-size: 15px;">西宁onLine</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://blog.21w.space" title="贰十一万" target="_blank">贰十一万</a><ul></ul><a href="http://tengblog.com/" title="马腾的博客" target="_blank">马腾的博客</a><ul></ul><a href="http://cyang.tech/" title="cyang's blog" target="_blank">cyang's blog</a><ul></ul><a href="https://blog.helbing.cn/" title="helbing's blog" target="_blank">helbing's blog</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">一肩月光.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script>(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://s95.cnzz.com/z_stat.php?id=1260247646&web_id=1260247646";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

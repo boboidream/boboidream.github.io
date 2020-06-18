@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="[&quot;一肩月光&quot;,&quot;前端&quot;,&quot;javascript&quot;]"><title>Mac 学习笔记（五）键盘映射 | 一肩月光</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + '17a4a7561f87f5a657fc4175aaced019';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+  </script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Mac 学习笔记（五）键盘映射</h1><a id="logo" href="/.">一肩月光</a><p class="description">记录，为清醒的活着。</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/work/"><i class="fa fa-leaf"> work</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Mac 学习笔记（五）键盘映射</h1><div class="post-meta">Nov 22, 2015<span> | </span><span class="category"><a href="/categories/操作系统/">操作系统</a></span><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><p><img src="/img/2015-11-22-1.jpg" alt="MLA22LL"></p>
+<blockquote>
+<p>将普通的PC键盘、机械键盘等，映射成为 Mac键盘布局<br>Automator &gt; Service &gt; Launch Application &gt; no input &gt; Keyboard &gt; Shortcuts &gt;Services</p>
+</blockquote>
+<h2 id="一、下载软件"><a href="#一、下载软件" class="headerlink" title="一、下载软件"></a>一、下载软件</h2><p>Karabiner：键盘映射 [<a href="https://pqrs.org/osx/karabiner/index.html.en]" target="_blank" rel="noopener">https://pqrs.org/osx/karabiner/index.html.en]</a></p>
+<h2 id="二、苹果键位参考"><a href="#二、苹果键位参考" class="headerlink" title="二、苹果键位参考"></a>二、苹果键位参考</h2><p><img src="/img/2015-11-22-2.jpeg" alt="MB110CH"></p>
+<h2 id="三、常用设置"><a href="#三、常用设置" class="headerlink" title="三、常用设置"></a>三、常用设置</h2><ul>
+<li><p>对调 Command 与 Option</p>
+<blockquote>
+<p>在”Change Command_L Key (Left Command)”下面选择”Command_L to Option_L”<br>在”Change Command_L Key (Left Command)”下面选择”Command_L to Option_L”</p>
+</blockquote>
+</li>
+<li><p>PrintScreen 设为 Eject</p>
+</li>
+<li><p>NumLock 设为 Command+Delete 一键删除文件（mac上NumLock没用，DAS键盘对应的就是Clear键）</p>
+</li>
+<li><p>Insert 设为 FN</p>
+</li>
+<li>FN键盘<br>  •    f1-f3 控制亮度<br>  •    f2 mission control<br>  •    f4 launchpad<br>  •    f5-f6 键盘背光<br>  •    f7-f9 媒体控制<br>  •    f10-f12 音量控制</li>
+</ul>
+<h2 id="四、保存自己的配置"><a href="#四、保存自己的配置" class="headerlink" title="四、保存自己的配置"></a>四、保存自己的配置</h2><ul>
+<li><p>找到配置文件，点<code>Open private.xml</code><br><img src="/img/2015-11-22-3.png" alt="Open private"></p>
+</li>
+<li><p>找到并修改键盘对应的vendor id和product id<br><img src="/img/2015-11-22-4.png" alt="ID"></p>
+</li>
+<li>在EventViewer里面点Main标签，按下A键，misc一栏里就可查看要修改键位代码。<br><img src="/img/2015-11-22-5.png" alt="键位代码"></li>
+<li><p>要实现A和B两个键互换，语法是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;autogen&gt; __KeyToKey__ KeyCode::A, KeyCode::B &lt;/autogen&gt;</span><br><span class="line">&lt;autogen&gt; __KeyToKey__ KeyCode::B, KeyCode::A &lt;/autogen&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置为组合键</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;autogen&gt; __KeyToKey__ KeyCode::A, ModifierFlag::MOD, KeyCode::B, ModifierFlag::MOD&lt;/autogen&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="五、载入文件"><a href="#五、载入文件" class="headerlink" title="五、载入文件"></a>五、载入文件</h2><ul>
+<li>点 <code>Reload XML</code>，选中自定义配置就OK了。<br><img src="/img/2015-11-22-6.png" alt="载入"></li>
+</ul>
+<h2 id="六、为F1、F2、……F9-设置快捷键"><a href="#六、为F1、F2、……F9-设置快捷键" class="headerlink" title="六、为F1、F2、……F9 设置快捷键"></a>六、为F1、F2、……F9 设置快捷键</h2><ul>
+<li>添加任意应用快捷键<blockquote>
+<p>请参考[<a href="http://www.macx.cn/thread-2138732-1-1.html]" target="_blank" rel="noopener">http://www.macx.cn/thread-2138732-1-1.html]</a></p>
+</blockquote>
+</li>
+<li><p>将F1 映射为 Shift+Command+F1 即可一键启动，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;autogen&gt;__KeyToKey__ KeyCode::F7,  KeyCode::D, ModifierFlag::COMMAND_L, ModifierFlag::OPTION_L&lt;/autogen&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>也可启动任意需要功能，比如一键退出所有程序，设为服务添加快捷键，如上：</p>
+<blockquote>
+<p>请参考 [<a href="http://wenku.baidu.com/view/b4bbd0188e9951e79a892732.html]" target="_blank" rel="noopener">http://wenku.baidu.com/view/b4bbd0188e9951e79a892732.html]</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="七、其他"><a href="#七、其他" class="headerlink" title="七、其他"></a>七、其他</h2><p>特殊情况下，设置键盘快捷键会出现问题，运行以下命令可修复：<br><code>rm ~/Library/Preferences/com.apple.symbolichotkeys.plist</code></p>
+<ul>
+<li>根据自己键盘设置的：private.xml</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;root&gt;</span><br><span class="line">    &lt;devicevendordef&gt;</span><br><span class="line">        &lt;vendorname&gt;Logitech&lt;/vendorname&gt;</span><br><span class="line">        &lt;vendorid&gt;0x046d&lt;/vendorid&gt;</span><br><span class="line">    &lt;/devicevendordef&gt;</span><br><span class="line"></span><br><span class="line">    &lt;deviceproductdef&gt;</span><br><span class="line">        &lt;productname&gt;USB Receiver&lt;/productname&gt;</span><br><span class="line">        &lt;productid&gt;0xc52b&lt;/productid&gt;</span><br><span class="line">    &lt;/deviceproductdef&gt;</span><br><span class="line"></span><br><span class="line">    &lt;item&gt;</span><br><span class="line">        &lt;name&gt;Logictech&lt;/name&gt;</span><br><span class="line">        &lt;identifier&gt;private.deviceproductdef&lt;/identifier&gt;</span><br><span class="line">        &lt;device_only&gt;DeviceVendor::Logitech, DeviceProduct::USB Receiver&lt;/device_only&gt;</span><br><span class="line">        &lt;identifier&gt;private.remap.pc_to_mac&lt;/identifier&gt;</span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::HELP, KeyCode::FN&lt;/autogen&gt;</span><br><span class="line">        &lt;!-- &lt;autogen&gt;__KeyToKey__ KeyCode::PC_APPLICATION, KeyCode::FN&lt;/autogen&gt; --&gt;</span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::COMMAND_L, KeyCode::OPTION_L&lt;/autogen&gt;</span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::COMMAND_R, KeyCode::OPTION_R&lt;/autogen&gt;</span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::OPTION_L, KeyCode::COMMAND_L&lt;/autogen&gt;</span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::OPTION_R, KeyCode::COMMAND_R&lt;/autogen&gt;</span><br><span class="line">   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::F1,  KeyCode::F11&lt;/autogen&gt;</span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::F2,  KeyCode::F2, ModifierFlag::SHIFT_L, ModifierFlag::COMMAND_L&lt;/autogen&gt;</span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::F4,  KeyCode::F4, ModifierFlag::SHIFT_L, ModifierFlag::COMMAND_L&lt;/autogen&gt;</span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::F5,  KeyCode::EXPOSE_ALL&lt;/autogen&gt;</span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::F6,  KeyCode::F6, ModifierFlag::SHIFT_L, ModifierFlag::COMMAND_L&lt;/autogen&gt;</span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::F7,  KeyCode::D, ModifierFlag::COMMAND_L, ModifierFlag::OPTION_L&lt;/autogen&gt;</span><br><span class="line">        &lt;!-- &lt;autogen&gt;__KeyToKey__ KeyCode::F8,  ConsumerKeyCode::MUSIC_PLAY&lt;/autogen&gt; --&gt;</span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::F9,  ConsumerKeyCode::EJECT, ModifierFlag::CONTROL_L, ModifierFlag::SHIFT_L&lt;/autogen&gt;</span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::F10, ConsumerKeyCode::POWER, ModifierFlag::COMMAND_L, ModifierFlag::OPTION_L&lt;/autogen&gt;</span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::F11, ConsumerKeyCode::EJECT, ModifierFlag::COMMAND_L, ModifierFlag::OPTION_L&lt;/autogen&gt;</span><br><span class="line">        &lt;!-- &lt;autogen&gt;__KeyToKey__ KeyCode::F12, ConsumerKeyCode::VOLUME_UP&lt;/autogen&gt; --&gt;</span><br><span class="line"></span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::KEYPAD_CLEAR, KeyCode::DELETE, ModifierFlag::COMMAND_L&lt;/autogen&gt;</span><br><span class="line">        &lt;autogen&gt;__KeyToKey__ KeyCode::PC_PRINTSCREEN, ConsumerKeyCode::EJECT&lt;/autogen&gt;</span><br><span class="line">    &lt;/item&gt;</span><br><span class="line">&lt;/root&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>本文参考：</p>
+<ol>
+<li>[键盘] 还在纠结Mac版键盘？试试KeyRemap4MacBook吧！[<a href="http://www.chiphell.com/thread-678136-1-1.html]" target="_blank" rel="noopener">http://www.chiphell.com/thread-678136-1-1.html]</a></li>
+<li>任意PC键盘映射到MAC键盘的karabiner配置xml文件[<a href="http://lonestone.iteye.com/blog/215∏7692]" target="_blank" rel="noopener">http://lonestone.iteye.com/blog/215∏7692]</a></li>
+<li>官方文档：[<a href="https://pqrs.org/osx/karabiner/document.html.en]" target="_blank" rel="noopener">https://pqrs.org/osx/karabiner/document.html.en]</a></li>
+</ol>
+</blockquote>
+</div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>一肩月光</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/p/abce.html">https://www.wenboz.com/p/abce.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</li></ul></div><br><div class="tags"><a href="/tags/Mac/">Mac</a></div><div class="post-nav"><a class="pre" href="/p/e40f.html">初尝Farbox</a><a class="next" href="/p/662c.html">换个阵地</a></div><div id="lv-container" data-id="city" data-uid="MTAyMC80MTU1Ny8xODEwNA=="><script>(function(d, s) {
+   var j, e = d.getElementsByTagName(s)[0];
+   if (typeof LivereTower === 'function') { return; }
+   j = d.createElement(s);
+   j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+   j.async = true;
+   e.parentNode.insertBefore(j, e);
+})(document, 'script');
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/个人项目/">个人项目</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/健身/">健身</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/最优解/">最优解</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电影/">电影</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网站建设/">网站建设</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件/">软件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/追梦/" style="font-size: 15px;">追梦</a> <a href="/tags/好友/" style="font-size: 15px;">好友</a> <a href="/tags/生活方式/" style="font-size: 15px;">生活方式</a> <a href="/tags/重庆/" style="font-size: 15px;">重庆</a> <a href="/tags/健康/" style="font-size: 15px;">健康</a> <a href="/tags/日本/" style="font-size: 15px;">日本</a> <a href="/tags/五笔/" style="font-size: 15px;">五笔</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/老罗/" style="font-size: 15px;">老罗</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 15px;">正则表达式</a> <a href="/tags/深圳/" style="font-size: 15px;">深圳</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/游戏/" style="font-size: 15px;">游戏</a> <a href="/tags/路由器/" style="font-size: 15px;">路由器</a> <a href="/tags/Rails/" style="font-size: 15px;">Rails</a> <a href="/tags/游泳/" style="font-size: 15px;">游泳</a> <a href="/tags/电影/" style="font-size: 15px;">电影</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Atom/" style="font-size: 15px;">Atom</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/木心/" style="font-size: 15px;">木心</a> <a href="/tags/下载/" style="font-size: 15px;">下载</a> <a href="/tags/年记/" style="font-size: 15px;">年记</a> <a href="/tags/爬虫/" style="font-size: 15px;">爬虫</a> <a href="/tags/VuePress/" style="font-size: 15px;">VuePress</a> <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/西宁onLine/" style="font-size: 15px;">西宁onLine</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://blog.21w.space" title="贰十一万" target="_blank">贰十一万</a><ul></ul><a href="http://tengblog.com/" title="马腾的博客" target="_blank">马腾的博客</a><ul></ul><a href="http://cyang.tech/" title="cyang's blog" target="_blank">cyang's blog</a><ul></ul><a href="https://blog.helbing.cn/" title="helbing's blog" target="_blank">helbing's blog</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">一肩月光.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script>(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://s95.cnzz.com/z_stat.php?id=1260247646&web_id=1260247646";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

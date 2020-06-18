@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="[&quot;一肩月光&quot;,&quot;前端&quot;,&quot;javascript&quot;]"><title>UEFI 启动项修改教程 | 一肩月光</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + '17a4a7561f87f5a657fc4175aaced019';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+  </script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">UEFI 启动项修改教程</h1><a id="logo" href="/.">一肩月光</a><p class="description">记录，为清醒的活着。</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/work/"><i class="fa fa-leaf"> work</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">UEFI 启动项修改教程</h1><div class="post-meta">Sep 9, 2016<span> | </span><span class="category"><a href="/categories/操作系统/">操作系统</a></span><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><p><img src="/img/2016-09-12-0.png" alt="花"></p>
+<blockquote>
+<p>缘起：经过一个周末奋战，Hackintosh (黑苹果) 终又满血复活。此次升级经历着实惨痛。</p>
+</blockquote>
+<blockquote>
+<p>虽啃上 macOS 10.12 Sierra 公测版，终不敌显卡驱动难题，重回旧版。但系统一旦升级，不可降级。索性格式化系统盘重装。回首望，一路坎坷，还好取得些经验、感悟，遂记录之。</p>
+</blockquote>
+<blockquote>
+<p>千头万绪，暂且小处着手，慢慢道来，第三篇。</p>
+</blockquote>
+<p>如今，EFI + GPT 启动的方式流行，比传统 bios 启动效率快很多，而修改启动项也简单很多。简单的说，就是磁盘分出一块通常为 fat32 格式的磁盘，放入对应文件，并添加到启动管理就大工告成。但现实远远没有想象那么简单。</p>
+<blockquote>
+<p>欲深入了解，请阅读 <a href="https://blog.woodelf.org/2014/05/28/uefi-boot-how-it-works.html" target="_blank" rel="noopener">（译）UEFI 启动：实际工作原理</a></p>
+</blockquote>
+<p>先说简单的，在 Windows 通过软件修改，EFI 启动项。</p>
+<h2 id="1-Windows-上修改-EFI-启动项"><a href="#1-Windows-上修改-EFI-启动项" class="headerlink" title="1. Windows 上修改 EFI 启动项"></a>1. Windows 上修改 EFI 启动项</h2><blockquote>
+<ol>
+<li>可以正常启动的 windows 系统或者PE系统（如果没有推荐 weiPE）</li>
+<li>软件 <a href="https://pan.baidu.com/s/1c2hx7Rq" target="_blank" rel="noopener">BOOTICE</a> （备选软件 EasyUEFI）</li>
+</ol>
+</blockquote>
+<p>如图，只需填入自己的启动项路径，和名称即可。</p>
+<p><img src="/img/2016-09-12-1.png" alt="bootice.png"></p>
+<h2 id="2-用-UEFI-引导-Windows-系统"><a href="#2-用-UEFI-引导-Windows-系统" class="headerlink" title="2. 用 UEFI 引导 Windows 系统"></a>2. 用 UEFI 引导 Windows 系统</h2><p>如已有 BIOS + MBR 方式引导的系统，想尝试下 UEFI 方式。请确保以下两点：</p>
+<blockquote>
+<p>1、主板必须支持UEFI启动<br>2、系统是win7\win8\win8.1系统必须是64位，win10系统可以是32位的，也可以是64位的。</p>
+</blockquote>
+<p>那么需要的做的只有两件事</p>
+<ol>
+<li>用磁盘工具 <code>DiskGenius</code> 分出一个 FAT32 格式 200M 左右大小的磁盘，分配盘符，例：F</li>
+<li>打开 Win 命令行，执行如下命令<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bcdboot c:\windows /s F: /f UEFI</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>会提示，启动项已经创建成功。BIOS 打开 UEFI 支持，再次启动就可以看到。<code>windows boot manager</code> 选项。</p>
+<h2 id="3-通过-uefi-shell-修改"><a href="#3-通过-uefi-shell-修改" class="headerlink" title="3. 通过 uefi shell 修改"></a>3. 通过 <code>uefi shell</code> 修改</h2><p>如果还习惯命令行的话，不妨试试这种方法，通常支持 UEFI 启动的主板，都带有 <code>uefi shell</code></p>
+<p>我是通过 Clover 自带的工具，进入第一步，先确定自己的启动项在哪个盘。可以根据当前启动排行，来区分磁盘编号。然后查看对应分区。开始：</p>
+<p><img src="/img/2016-09-12-2.png" alt="打开 uefi shell"></p>
+<ol>
+<li><p>选择启动文件所在分区，我的启动项在fs2分区。（注意看 <code>GPT</code> 前编号为分区，后为磁盘识别号）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs2: <span class="comment"># 回车</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常用命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bcdf boot dump <span class="comment"># 列出当前启动项</span></span><br><span class="line">bcfg boot rm 1 <span class="comment"># 删掉编号为 1 的启动项</span></span><br><span class="line">bcfg boot mv 2 0 <span class="comment"># 将编号为 2 的启动项移动到第一项</span></span><br><span class="line">bcfg boot add 3 fs0:\EFI\refind\refind_x64.efi <span class="string">"rEFInd"</span> <span class="comment"># 在 fs0 分区，添加如下路径启动项</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="/img/2016-09-12-3.png" alt="选择分区"></p>
+<p><img src="/img/2016-09-12-4.png" alt="启动项列表"></p>
+<blockquote>
+<p>更多的命令，请参考 <a href="https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface" target="_blank" rel="noopener">UEFI Shell</a></p>
+</blockquote>
+</div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>一肩月光</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/p/a67b.html">https://www.wenboz.com/p/a67b.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</li></ul></div><br><div class="tags"></div><div class="post-nav"><a class="pre" href="/p/f3c1.html">mac 磁盘分区显示为 Untitled 不要怕</a><a class="next" href="/p/f279.html">Mac 下制作 Clover 启动U盘</a></div><div id="lv-container" data-id="city" data-uid="MTAyMC80MTU1Ny8xODEwNA=="><script>(function(d, s) {
+   var j, e = d.getElementsByTagName(s)[0];
+   if (typeof LivereTower === 'function') { return; }
+   j = d.createElement(s);
+   j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+   j.async = true;
+   e.parentNode.insertBefore(j, e);
+})(document, 'script');
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/个人项目/">个人项目</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/健身/">健身</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/最优解/">最优解</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电影/">电影</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网站建设/">网站建设</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件/">软件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/追梦/" style="font-size: 15px;">追梦</a> <a href="/tags/好友/" style="font-size: 15px;">好友</a> <a href="/tags/生活方式/" style="font-size: 15px;">生活方式</a> <a href="/tags/重庆/" style="font-size: 15px;">重庆</a> <a href="/tags/健康/" style="font-size: 15px;">健康</a> <a href="/tags/日本/" style="font-size: 15px;">日本</a> <a href="/tags/五笔/" style="font-size: 15px;">五笔</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/老罗/" style="font-size: 15px;">老罗</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 15px;">正则表达式</a> <a href="/tags/深圳/" style="font-size: 15px;">深圳</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/游戏/" style="font-size: 15px;">游戏</a> <a href="/tags/路由器/" style="font-size: 15px;">路由器</a> <a href="/tags/Rails/" style="font-size: 15px;">Rails</a> <a href="/tags/游泳/" style="font-size: 15px;">游泳</a> <a href="/tags/电影/" style="font-size: 15px;">电影</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Atom/" style="font-size: 15px;">Atom</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/木心/" style="font-size: 15px;">木心</a> <a href="/tags/下载/" style="font-size: 15px;">下载</a> <a href="/tags/年记/" style="font-size: 15px;">年记</a> <a href="/tags/爬虫/" style="font-size: 15px;">爬虫</a> <a href="/tags/VuePress/" style="font-size: 15px;">VuePress</a> <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/西宁onLine/" style="font-size: 15px;">西宁onLine</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://blog.21w.space" title="贰十一万" target="_blank">贰十一万</a><ul></ul><a href="http://tengblog.com/" title="马腾的博客" target="_blank">马腾的博客</a><ul></ul><a href="http://cyang.tech/" title="cyang's blog" target="_blank">cyang's blog</a><ul></ul><a href="https://blog.helbing.cn/" title="helbing's blog" target="_blank">helbing's blog</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">一肩月光.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script>(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://s95.cnzz.com/z_stat.php?id=1260247646&web_id=1260247646";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

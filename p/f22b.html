@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="[&quot;一肩月光&quot;,&quot;前端&quot;,&quot;javascript&quot;]"><title>Hexo + GitHub 搭建个人博客及反思 | 一肩月光</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + '17a4a7561f87f5a657fc4175aaced019';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+  </script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Hexo + GitHub 搭建个人博客及反思</h1><a id="logo" href="/.">一肩月光</a><p class="description">记录，为清醒的活着。</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/work/"><i class="fa fa-leaf"> work</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Hexo + GitHub 搭建个人博客及反思</h1><div class="post-meta">Jan 31, 2016<span> | </span><span class="category"><a href="/categories/网站建设/">网站建设</a></span><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><p><img src="/img/2016-01-31-01.png" alt="zwb.io"></p>
+<h2 id="0-个人需求"><a href="#0-个人需求" class="headerlink" title="0. 个人需求"></a>0. 个人需求</h2><p>偶然读到 <a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="noopener">使用GitHub和Hexo搭建免费静态Blog</a> 这篇文章就中了 Hexo 的毒，有发现新大陆的欣喜，终于寒假在家用三天时间把欲望化成了成果。</p>
+<p>开始的需求是非常模糊的，就像一个暴发户看见别人开一辆靓车，内心涌现「妈的，真好看，我也得搞一辆」。而我到了寒假，成了「时间的暴发户」，开始实施心中朦胧的需求。</p>
+<p>直到做到一半，我才明白自己真正想要的是什么。让我明白<strong>从一个想法到明确的需求之间，需要阅读大量相关材料，一定的实践和技术积累的。</strong>不是我想要一个xxx那么简单的。以下我边实践，边完善的需求与方案表。（括号内为放案）</p>
+<ol>
+<li>一个终身的域名。（在 <a href="https://sg.godaddy.com/zh/" target="_blank" rel="noopener">GoDaddy</a> 购置 <a href="http://zwb.io" target="_blank" rel="noopener">zwb.io</a> 两年，2018年1月到期。)</li>
+<li>国内、外都可高速稳定解析的 DNS服务器。（使用 <a href="https://www.dnspod.cn/" target="_blank" rel="noopener">DNSPOD</a>）</li>
+<li>稳定，高速，不被审核的空间。(<a href="https://github.com/" target="_blank" rel="noopener">github</a> + <a href="http://www.qiniu.com/" target="_blank" rel="noopener">七牛</a> 待优化)</li>
+<li>一个自主的博客系统，自主搭建，定制化高，本地 md 文件备份，操作便捷。(<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 待优化)</li>
+<li>简洁优雅的主题 （<a href="https://github.com/pagecho/maupassant" target="_blank" rel="noopener">Maupassant</a> 待完善） </li>
+</ol>
+<p>其实，需求具体化就是罗子雄所讲「将一个大问题，细分为一个个可以解决的小问题」。此步骤大体遵循数据流转次序。</p>
+<p>域名 ——&gt; DNS解析 ——&gt; 主机 ——&gt; 博客系统 ——&gt; 界面</p>
+<h2 id="1-购买域名"><a href="#1-购买域名" class="headerlink" title="1. 购买域名"></a>1. 购买域名</h2><p>全球最大域名服务商，对比发现，确实便宜啊。<a href="https://www.godaddy.com/" target="_blank" rel="noopener">godaddy官网</a></p>
+<p>记得搜 「GoDaddy优惠码」,我搜到一优惠30%的码，购买 <a href="http://zwb.io/" target="_blank" rel="noopener">zwb.io</a> 便宜了近200元。靠谱！</p>
+<h2 id="2-本地安装-hexo"><a href="#2-本地安装-hexo" class="headerlink" title="2. 本地安装 hexo"></a>2. 本地安装 hexo</h2><p>如果不想折腾 「Farbox」 已经满足以上大部分需求，且我已经买了它的服务。最终没有选择他的原因，因为他不是我的，本质上我拿一堆 MD 文件，他的系统帮我做好了一系列之后的事情，这感觉与发博客到「简书」，感觉类似。</p>
+<p>「Farbox」很优秀，但 Hexo + Github 更自由。</p>
+<hr>
+<p>请参考 Hexo<a href="https://hexo.io/docs/" target="_blank" rel="noopener">官方文档</a>,个人 Linux 系统安装过程，供参考。</p>
+<ul>
+<li><p>搭建环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install nodejs</span><br><span class="line">$ sudo apt-get install npm</span><br><span class="line">$ sudo apt-get install git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 Hexo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>我遇到错误提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/env: node: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>执行以下命令解决</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install nodejs-legacy</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>遇到错误 <code>Error: Cannot find module &#39;./build/Release/DTraceProviderBindings</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo --no-optional</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装插件可参考</p>
+<blockquote>
+<p><a href="https://ckjoker.github.io/2015/01/27/Linux-github-hexo-blog/" target="_blank" rel="noopener">Linux下github+hexo搭建自己的博客</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="3-github-空间配置"><a href="#3-github-空间配置" class="headerlink" title="3. github 空间配置"></a>3. github 空间配置</h2><p>参考：</p>
+<blockquote>
+<p><a href="http://www.jianshu.com/p/05289a4bc8b2" target="_blank" rel="noopener">如何搭建一个独立博客——简明Github Pages与Hexo教程</a></p>
+<p><a href="https://xuanwo.org/2015/03/26/hexo-intor/" target="_blank" rel="noopener">史上最详细的Hexo博客搭建图文教程</a></p>
+</blockquote>
+<p>由于 Github 在国内速度不理想，想利用国内空间服务来加速网站加载速度。本来最理想的方案是：</p>
+<p>Gitcafe Pages 服务，可参考 「<a href="http://stackvoid.com/how-to-transfer-github-pages-to-gitcafe/" target="_blank" rel="noopener">如何备份Github博客至GitCafe</a>」,可是今天访问 <a href="https://gitcafe.com/" target="_blank" rel="noopener">GitCafe</a> 一直显示 500 ，估计是跪了。</p>
+<p>一计不成，又生一计。我自己是有国内空间的 <a href="http://tobewho.com/" target="_blank" rel="noopener">TobeWho</a>,我可否启动子域名 blog.tobewho.com ,然后将 zwb.io CNAME 到子域名，国内访问走这条路径，不就提高了访问速度啦！简直被自己的机智打动了。</p>
+<p>第一步，阿里免费主机不支持子域名，参考 「<a href="http://9iphp.com/web/php/subdomain-on-virtual-host.html" target="_blank" rel="noopener">通过.htaccess文件将二级域名绑定到子目录</a>」完美解决。</p>
+<p>第二步，将子域名绑定到主机，并添加解析。参考 「<a href="http://blog.xenuts.com/2015/07/07/AliYun-Virtual-Machine-Hostname-Settings/" target="_blank" rel="noopener">阿里云虚拟主机绑定二级域名到子目录</a>」 ,完美解决。</p>
+<p>第三步，静静期待奇迹的发生。然后看到 阿里云公告，无备案的域名不能接入。计谋扑街了，看来想这么做需要将域名转到 阿里云，并用阿里的空间，备案完成才行。回想备案那复杂的流程，若为自由故，速度也可抛。</p>
+<p>心中又生一计。用 「七牛」做图床，加速网络总行吧，参考 「<a href="http://wuxiaolong.me/2014/10/30/qiniu-photo-bed/" target="_blank" rel="noopener">使用七牛作为github博客的图床</a>」。结果七牛认证也需要身份证拍照什么的，看了下蛮简单的，而且「七牛」也提供域名绑定功能，也就是说以后可以将静态网站布置到七牛上，前提是有国内备案。暂时还不考虑，做法可参考 「<a href="https://github.com/gyk001/hexo-qiniu-sync" target="_blank" rel="noopener">hexo-qiniu-sync</a>」。</p>
+<p>目前的写作流程。</p>
+<p>Emacs写作 ——&gt; 简书并加题图 ——&gt; hexo 生成文件 ——&gt; 将「简书」生成图放 hexo/images ——&gt; 修改图片链接到其牛 ——&gt; hexo 提交到 zwb.io</p>
+<p>流程貌似复杂，以后再慢慢优化。</p>
+<h2 id="4-域名解析"><a href="#4-域名解析" class="headerlink" title="4. 域名解析"></a>4. 域名解析</h2><p>对比「阿里云解析」与 <a href="https://www.dnspod.cn/" target="_blank" rel="noopener">DNSPOD</a> 发现，还是 DNSPOD 界面友善，功能齐全，可以按国内国外等线路设置不同访问路径，优化线路，还有状态检测等等，测试总体感受胜于 「阿里云解析」。</p>
+<p><a href="http://quantumman.me/blog/setting-up-a-domain-with-gitHub-pages.html" target="_blank" rel="noopener">GitHub Pages 绑定来自阿里云的域名</a></p>
+<p>注意A记录只能填 GitPages ip地址，CNAME 只能填 域名值 如 <code>zwb.io</code>。</p>
+<p>GitPages ip 地址：<a href="https://help.github.com/articles/tips-for-configuring-an-a-record-with-your-dns-provider/" target="_blank" rel="noopener">Tips for configuring an A record with your DNS provider</a></p>
+<h2 id="5-切换主题"><a href="#5-切换主题" class="headerlink" title="5. 切换主题"></a>5. 切换主题</h2><p><a href="https://www.haomwei.com/technology/maupassant-hexo.html" target="_blank" rel="noopener">大道至简——Hexo简洁主题推荐</a></p>
+<p>这主题，实在喜欢。暂无简介页和订阅页，待我慢慢完善。</p>
+<h2 id="6-最后"><a href="#6-最后" class="headerlink" title="6. 最后"></a>6. 最后</h2><p>一不小心刚看到 <a href="http://www.williamlong.info/archives/4468.html" target="_blank" rel="noopener">知名主机商Linode被关键字屏蔽</a>，看来在这片土地上，备案才是正确的姿势。</p>
+<p>毕竟未来也一定会为阿里云的主机付费，等备案后，hexo 直接 ftp 部署到阿里与七牛好了。把hexo文件直接放在dropbox文件夹，实现国外备份，随时部署。</p>
+<p>最后， <a href="http://zwb.io/" target="_blank" rel="noopener">zwb.io</a> 欢迎您。</p>
+</div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>一肩月光</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/p/f22b.html">https://www.wenboz.com/p/f22b.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</li></ul></div><br><div class="tags"><a href="/tags/Hexo/">Hexo</a></div><div class="post-nav"><a class="pre" href="/p/a079.html">「多说」插件优化 默认头像+美化+提速</a><a class="next" href="/p/120.html">来到「zwb.io」的第一天</a></div><div id="lv-container" data-id="city" data-uid="MTAyMC80MTU1Ny8xODEwNA=="><script>(function(d, s) {
+   var j, e = d.getElementsByTagName(s)[0];
+   if (typeof LivereTower === 'function') { return; }
+   j = d.createElement(s);
+   j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+   j.async = true;
+   e.parentNode.insertBefore(j, e);
+})(document, 'script');
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/个人项目/">个人项目</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/健身/">健身</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/最优解/">最优解</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电影/">电影</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网站建设/">网站建设</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件/">软件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/追梦/" style="font-size: 15px;">追梦</a> <a href="/tags/好友/" style="font-size: 15px;">好友</a> <a href="/tags/生活方式/" style="font-size: 15px;">生活方式</a> <a href="/tags/重庆/" style="font-size: 15px;">重庆</a> <a href="/tags/健康/" style="font-size: 15px;">健康</a> <a href="/tags/日本/" style="font-size: 15px;">日本</a> <a href="/tags/五笔/" style="font-size: 15px;">五笔</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/老罗/" style="font-size: 15px;">老罗</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 15px;">正则表达式</a> <a href="/tags/深圳/" style="font-size: 15px;">深圳</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/游戏/" style="font-size: 15px;">游戏</a> <a href="/tags/路由器/" style="font-size: 15px;">路由器</a> <a href="/tags/Rails/" style="font-size: 15px;">Rails</a> <a href="/tags/游泳/" style="font-size: 15px;">游泳</a> <a href="/tags/电影/" style="font-size: 15px;">电影</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Atom/" style="font-size: 15px;">Atom</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/木心/" style="font-size: 15px;">木心</a> <a href="/tags/下载/" style="font-size: 15px;">下载</a> <a href="/tags/年记/" style="font-size: 15px;">年记</a> <a href="/tags/爬虫/" style="font-size: 15px;">爬虫</a> <a href="/tags/VuePress/" style="font-size: 15px;">VuePress</a> <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/西宁onLine/" style="font-size: 15px;">西宁onLine</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://blog.21w.space" title="贰十一万" target="_blank">贰十一万</a><ul></ul><a href="http://tengblog.com/" title="马腾的博客" target="_blank">马腾的博客</a><ul></ul><a href="http://cyang.tech/" title="cyang's blog" target="_blank">cyang's blog</a><ul></ul><a href="https://blog.helbing.cn/" title="helbing's blog" target="_blank">helbing's blog</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">一肩月光.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script>(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://s95.cnzz.com/z_stat.php?id=1260247646&web_id=1260247646";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="[&quot;一肩月光&quot;,&quot;前端&quot;,&quot;javascript&quot;]"><title>折腾路由记 | 一肩月光</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + '17a4a7561f87f5a657fc4175aaced019';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+  </script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">折腾路由记</h1><a id="logo" href="/.">一肩月光</a><p class="description">记录，为清醒的活着。</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/work/"><i class="fa fa-leaf"> work</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">折腾路由记</h1><div class="post-meta">Apr 19, 2016<span> | </span><span class="category"><a href="/categories/随笔/">随笔</a></span><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><p><img src="/img/2016-04-17.jpg" alt="Portrait of a Horse"><br>一周前感受了路由发烧友的世界。</p>
+<p>这里不仅折腾软件，路由系统，还改硬件，存储器不够用？焊上一个；没有USB接口，刷机不方便？加一个；没留接口位置？把天线拔下来一根，反正很多三根天线的路由中间一根只是装饰……</p>
+<p>看到恩山论坛写 breed 的大侠 <a href="http://www.hackpascal.net/" target="_blank" rel="noopener"><strong>hackpascal</strong></a>，不禁一路顺着博客探究下究竟是何方神圣。竟然还是位学生，应该学的是无线电专业吧，博客中技术文章让我看的唏嘘不已，感叹这样的大牛哪会担心没工作呢。</p>
+<p>在 <a href="http://www.right.com.cn/forum/forum-72-1.html" target="_blank" rel="noopener">恩山论坛</a> 见到很多折腾路由 ROM 的，与当年折腾手机 ROM 的气氛很相似，不过大家折腾无非是想搭个梯子(SSH 和 VPN)、去广告、流量控制、帐号多拨(实现带宽叠加)……由于自己有梯子，主要还是想试试多拨，虽然最终失败，总算搞懂怎么回事了。</p>
+<p>这次折腾，心中是带着疑惑的。一件事有多种解决方案，比如路由器内存不够，明显有两种方案，一、再买个新的；二、自己焊上一个；多数正常人都选择第一个，某些人选择第二个并以发烧友自居。那么这「发烧」来的快乐究竟是为技术还是省钱？</p>
+<p>「发烧」会不会有穷人思维的影响？分析自己，折腾的快感有部分来源于不必花钱确能享受别人花钱才能享受的东西，听着像黑客，也像小偷，似乎有些许互通。很简单的一个问题，似乎能帮助自己认清这个问题，<strong>如果折腾的东西免费，你还会折腾吗？</strong></p>
+<p>如果答案是否定的。那么，得考虑下自己挣钱能力了。小时候，爸爸给我讲过一个笑话，但至今印象深刻「比尔盖茨掉了一百刀都不捡，为什么呢？他省下这几秒钟能挣更多的钱」。我想盖茨应该不会折腾路由器，应该折腾VR。能用钱解决的事就少花点精力和时间吧，把才智用到必须耗费精力的事上，读书、技术钻研(有明确方向)、欣赏艺术、旅游、陪家人……</p>
+<p>下边，还是把折腾过程中的收获记录下吧，弯路也是路啊。</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">路由器: 极路由1S (H5661)</span><br><span class="line">CPU: MTK7620A</span><br><span class="line">初始固件: 官方 0.9015</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>申请「开发者权限」<br><a href="http://bbs.hiwifi.com/thread-82822-1-1.html" target="_blank" rel="noopener">全系列极路由刷不死uboot（breed）教程</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">提示1: 如升级后，需要确认插件中「开发者模式」已安装</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>刷 <code>breed</code> (第三方启动器)<br><a href="http://www.right.com.cn/forum/thread-161906-1-1.html" target="_blank" rel="noopener">breed 官方贴</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">提示2: 一定要保证电脑可以联网，不联网无法从「开发者模式」获得root权限</span><br><span class="line">提示3: 登录 Winscp 时端口1022，开发者模式中说明中可查</span><br><span class="line">提示4: 如果 putty 提示无法连接，请再检查 root权限</span><br><span class="line">提示5: 在断电的情况下，按「rest」键；通电，直到所有灯频闪后；松手，进入 breed</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>刷不同 ROM</p>
+<ul>
+<li><a href="http://rocketime.f3322.org:9807/" target="_blank" rel="noopener">淘宝店的ROM</a></li>
+<li><a href="http://openwrt.io/about/" target="_blank" rel="noopener">OpenWrt</a></li>
+<li><a href="http://www.right.com.cn/forum/forum.php?mod=viewthread&amp;tid=161324&amp;highlight=%BB%AA%CB%B6" target="_blank" rel="noopener">改华硕[N14U N54U]5G 2G的7620老毛子Padavan固件(百度云同步 aria2 QOS)</a></li>
+</ul>
+</li>
+<li><p>OpenWrt 设置无线桥接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scan wifi </span><br><span class="line">以 client 模式接入已知密码的 wifi，只输入密码，其他不用管</span><br><span class="line">add wifi</span><br><span class="line">自定义个WIFI名， LAN 接口，高级里设置密码，保存</span><br><span class="line">最后，会看到无线中有两个wifi 一个 client 模式，一个 master 模式</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+<p>提示6: 最好用 谷歌等浏览器的无痕浏览，要不然会保存 cookie 非常烦人。<br><code>`</code></p>
+</li>
+</ol>
+<hr>
+<h3 id="WIFI安全"><a href="#WIFI安全" class="headerlink" title="WIFI安全"></a>WIFI安全</h3><p>所谓知己知彼百战不殆，当然，我不是为此才破解别人家密码的，深圳电信安装队实在不给力啊，十多天才来修光纤。而，没有网能干什么呢？<br>先来列举破解 wifi 的奇淫巧技。</p>
+<ol>
+<li>万能钥匙等 APP<br>这些软件不仅能读取别人的密码，还会将你自己的密码分享(可选)，我个人推测他会将密码上传到服务器，因为暴力破解时，就很有用啦，反正我认为此类软件极不安全。</li>
+<li>破译路由 PIN 码<br>一定要注意，路由有PIN选项的话，一定要关掉。 PIN 码是6位数字，很多快捷破解的关键就是 PIN 码，只要能不断的 PING 就一定会破解。当然，现在很多路由默认关闭，或者设置的防 PING 程序。</li>
+<li>暴力破解<br>minidwep-gtk [中文名:水滴]，从你通信过程中抓包。获得握手包后，选择密码库进行遍历匹配。如果你密码为纯数字，就很危险了。</li>
+<li>钓鱼破解<br>原理是用一个网卡对目标WIFI发送DDOS攻击，同时另外一张网卡创立与目标WIFI相同的名称，此时一旦有客户端链接上你的伪基站，就会看到 路由升级啊、浏览器升级啊、系统升级等等，需要你填写WIFI密码，一旦输入，就会被截取。很可怕。</li>
+<li>人肉破解<br>当时跟阿瑞聊天，谈到获取WIFI密码，姑娘去隔壁逛一圈两分钟的事，程序员要忙活半天。很简单，就是去问下别人的密码，当然要小心，当你的密码与路由器登录密码相同时，小心别人直接登录路由器做坏事情啊。</li>
+<li>攻入路由器<br>通常只有知道WIFI密码才能攻入路由器，但如果是新装宽带，就要特别小心了，新配置路由器默认wifi 没有密码，此时如果一旦进入路由器，无论看到 PIN码，还是获得了路由器管理密码，都是件十分棘手的事情。话说，我自己配置时就有小米用户接入，吓得的我赶紧重置，换了个高强度密码。</li>
+</ol>
+<hr>
+<h3 id="如何避免被蹭网？"><a href="#如何避免被蹭网？" class="headerlink" title="如何避免被蹭网？"></a>如何避免被蹭网？</h3><ol>
+<li>最好选用智能路由，就是能随时监控有几个人联网，有陌生设备会微信提醒等。如极路由、小米路由</li>
+<li>拿来路由器第一步，重置，并以迅雷不急掩耳盗铃之势，快速设置密码。</li>
+<li>进入路由器关闭 PIN</li>
+<li>WIFI 密码一定要高强度，数字、小写字母、大写字幕、特殊符号，别怕，一次麻烦，别人来家里另有解决方案。</li>
+<li>客人来访，此时智能路由的优势就体现出来啦，一键开启 客人WIFI 与主WIFI不在同一网络，安全、便捷，再也不用担心客人手机里安着WIFI 破解神器。</li>
+<li>自己千万别贪小便宜安装WIFI助手一类，WIFI事小，银行密码身份信息事大啊。</li>
+<li>如果怀疑自己被蹭网，用智能路由查一下，设备流量信息，黑客是可以仿 MAC 地址的，说的明白点，就是他用，但让路由器显示为你的设备在用流量。</li>
+<li>遇到陌生界面，升级什么的千万别输入敏感信息，特别是银行卡、验证码什么的，要慎重啊。</li>
+</ol>
+<p><strong><a href="https://movie.douban.com/subject/25932086/" target="_blank" rel="noopener">没有绝对安全的系统</a></strong></p>
+</div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>一肩月光</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/p/9ec9.html">https://www.wenboz.com/p/9ec9.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</li></ul></div><br><div class="tags"><a href="/tags/路由器/">路由器</a></div><div class="post-nav"><a class="pre" href="/p/cc89.html">16年初看过的几部电影</a><a class="next" href="/p/8491.html">比游戏更让人着迷的</a></div><div id="lv-container" data-id="city" data-uid="MTAyMC80MTU1Ny8xODEwNA=="><script>(function(d, s) {
+   var j, e = d.getElementsByTagName(s)[0];
+   if (typeof LivereTower === 'function') { return; }
+   j = d.createElement(s);
+   j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+   j.async = true;
+   e.parentNode.insertBefore(j, e);
+})(document, 'script');
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/个人项目/">个人项目</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/健身/">健身</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/最优解/">最优解</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电影/">电影</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网站建设/">网站建设</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件/">软件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/追梦/" style="font-size: 15px;">追梦</a> <a href="/tags/好友/" style="font-size: 15px;">好友</a> <a href="/tags/生活方式/" style="font-size: 15px;">生活方式</a> <a href="/tags/重庆/" style="font-size: 15px;">重庆</a> <a href="/tags/健康/" style="font-size: 15px;">健康</a> <a href="/tags/日本/" style="font-size: 15px;">日本</a> <a href="/tags/五笔/" style="font-size: 15px;">五笔</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/老罗/" style="font-size: 15px;">老罗</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 15px;">正则表达式</a> <a href="/tags/深圳/" style="font-size: 15px;">深圳</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/游戏/" style="font-size: 15px;">游戏</a> <a href="/tags/路由器/" style="font-size: 15px;">路由器</a> <a href="/tags/Rails/" style="font-size: 15px;">Rails</a> <a href="/tags/游泳/" style="font-size: 15px;">游泳</a> <a href="/tags/电影/" style="font-size: 15px;">电影</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Atom/" style="font-size: 15px;">Atom</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/木心/" style="font-size: 15px;">木心</a> <a href="/tags/下载/" style="font-size: 15px;">下载</a> <a href="/tags/年记/" style="font-size: 15px;">年记</a> <a href="/tags/爬虫/" style="font-size: 15px;">爬虫</a> <a href="/tags/VuePress/" style="font-size: 15px;">VuePress</a> <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/西宁onLine/" style="font-size: 15px;">西宁onLine</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://blog.21w.space" title="贰十一万" target="_blank">贰十一万</a><ul></ul><a href="http://tengblog.com/" title="马腾的博客" target="_blank">马腾的博客</a><ul></ul><a href="http://cyang.tech/" title="cyang's blog" target="_blank">cyang's blog</a><ul></ul><a href="https://blog.helbing.cn/" title="helbing's blog" target="_blank">helbing's blog</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">一肩月光.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script>(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://s95.cnzz.com/z_stat.php?id=1260247646&web_id=1260247646";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

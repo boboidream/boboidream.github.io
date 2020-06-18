@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="[&quot;一肩月光&quot;,&quot;前端&quot;,&quot;javascript&quot;]"><title>学习Linux系统 | 一肩月光</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + '17a4a7561f87f5a657fc4175aaced019';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+  </script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">学习Linux系统</h1><a id="logo" href="/.">一肩月光</a><p class="description">记录，为清醒的活着。</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/work/"><i class="fa fa-leaf"> work</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">学习Linux系统</h1><div class="post-meta">Jan 2, 2017<span> | </span><span class="category"><a href="/categories/操作系统/">操作系统</a></span><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><p><img src="/img/2017-01-02.jpg" alt="yellow"></p>
+<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p>这是2016年春节在家学习 <a href="http://cn.linux.vbird.org/" target="_blank" rel="noopener">鸟哥的私房菜</a> 过程中，所做的一些笔记，不想一年竟已过去。今年入了 16版 Macbook Pro，界面优美，易用不折腾，软件生态好，开发环境优异。</p>
+<p>将来很长一段时间，应该不会再折腾 Linux 了，就先发出来，权当束之高阁。</p>
+<h2 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h2><h3 id="修改DNS"><a href="#修改DNS" class="headerlink" title="修改DNS"></a>修改DNS</h3><p>暂时修改 sudo emacs -nw /etc/resolv.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法1：</span></span><br><span class="line">sudo vim /etc/network/interfaces</span><br><span class="line">dns-nameservers 8.8.8.8</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法2：（这个文件默认是空的）</span></span><br><span class="line">sudo vim /etc/resolvconf/resolv.conf.d/base</span><br><span class="line">nameserver 8.8.8.8</span><br><span class="line">nameserver 8.8.4.4</span><br><span class="line"></span><br><span class="line">如果有多个DNS就一行一个，修改好保存，然后执行</span><br><span class="line">resolvconf -u</span><br><span class="line">sudo vim /etc/resolvconf/resolv.conf.d/head</span><br></pre></td></tr></table></figure>
+<h3 id="关于输入法"><a href="#关于输入法" class="headerlink" title="关于输入法"></a>关于输入法</h3><ul>
+<li><a href="http://blog.chinaunix.net/uid-29190663-id-4127739.html" target="_blank" rel="noopener">删除ibus</a></li>
+</ul>
+<ul>
+<li>重启<code>fcitx</code>输入法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill fcitx &amp;&amp; fcitx -d</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>另外两个输入法 im-config<br>thai xim</p>
+<h3 id="提高电池的寿命并且减少过热"><a href="#提高电池的寿命并且减少过热" class="headerlink" title="提高电池的寿命并且减少过热"></a>提高电池的寿命并且减少过热</h3><p>笔记本过热是一个普遍的问题，它不仅仅存在于ubuntu中，也存在与其他的操作系统中，过热会影响电池的寿命。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打开终端，输入以下命令：</span></span><br><span class="line">sudo add-apt-repository ppa:linrunner/tlp</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install tlp tlp-rdw</span><br><span class="line">sudo tlp start</span><br></pre></td></tr></table></figure>
+<h3 id="PPA源管理"><a href="#PPA源管理" class="headerlink" title="PPA源管理"></a>PPA源管理</h3><ul>
+<li><p>删除PPA源</p>
+<ol>
+<li>到 源的 目 录:cd  /etc/apt/sources.list.d/</li>
+<li>可以看 到 关 于 源的 文件,删除即可。</li>
+</ol>
+</li>
+<li><p>添加一个PPA源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:user/ppa-name</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="软件篇"><a href="#软件篇" class="headerlink" title="软件篇"></a>软件篇</h2><ul>
+<li>sublime 中文输入<br><code>bash ~/sublime</code></li>
+</ul>
+<p>-）不要用中文版系统。中文输入法用 ibus 的 rime。<br>-）确定一个版本，不要在软件源中大版本升级（会死的很惨）。<br>-）不装第三方美化，不玩游戏，不装 Windows 虚拟机（你是买的正版的么？），不上 QQ。<br>-）用 Vim 编辑所有文字，用 LaTeX 排版所有非代码字符。<br>-）国内服务很多都没提供 Ubuntu 的客户端，那就不用。装个 Dropbox。<br>-）传文件直接 SCP、FTP，浏览器用 Chrome。电驴用 amule。BT 的话 BitTorrent 速度很慢。<br>-）其它命令行工具，按需 apt-get。如果找不到就到软件中心去下载。<br>-）因为免费，所以用起来问心无愧。-）任何系统上 SSD 都能嗨起来，包括 Ubuntu。<br>-）用一段时间就换吧，毕竟其 UI 系统没有 Apple 稳定。</p>
+<h2 id="电脑基础"><a href="#电脑基础" class="headerlink" title="电脑基础"></a>电脑基础</h2><h3 id="0-1-1-電腦硬體的五大單元"><a href="#0-1-1-電腦硬體的五大單元" class="headerlink" title="0.1.1 電腦硬體的五大單元"></a>0.1.1 電腦硬體的五大單元</h3><p>中央處理器 (Central Processing Unit, CPU)，為一個具有特定功能的晶片， 裡頭含有微指令集.<br>CPU 的工作主要在於管理與運算, 算數邏輯單元與控制單元。</p>
+<h3 id="0-1-2-一切設計的起點：-CPU-的架構"><a href="#0-1-2-一切設計的起點：-CPU-的架構" class="headerlink" title="0.1.2 一切設計的起點： CPU 的架構"></a>0.1.2 一切設計的起點： CPU 的架構</h3><p>兩種主要 CPU 架構， 分別是：精簡指令集 (RISC) 與複雜指令集 (CISC) 系統。</p>
+<ul>
+<li>x86<br>這是因為最早的那顆Intel發展出來的CPU代號稱為8086，後來依此架構又開發出80286, 80386…， 因此這種架構的CPU就被稱為x86架構了。</li>
+<li>x86_64<br>後來AMD依此架構修改新一代的CPU為64位元， 為了區別兩者的差異，因此64位元的個人電腦CPU又被統稱為x86_64的架構喔！<blockquote>
+<p>所謂的位元指的是CPU一次資料讀取的最大量！64位元CPU代表CPU一次可以讀寫64bits這麼多的資料.</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="電腦用途的分類"><a href="#電腦用途的分類" class="headerlink" title="電腦用途的分類"></a>電腦用途的分類</h3><p>工作站電腦強調的是穩定不當機，並且運算過程要完全正確，因此工作站以上等級的電腦在設計時的考量與個人電腦並不相同啦！</p>
+<h3 id="bit"><a href="#bit" class="headerlink" title="bit"></a>bit</h3><p>0/1 這個二進位的的單位我們稱為 bit。<br>1 Byte = 8 bits<br>CPU的運算速度常使用 MHz 或者是 GHz 之類的單位，這個 Hz 其實就是秒分之一。<br>大家常聽到的 20M/5M 光世代傳輸速度，如果轉成檔案容量的 byte 時，其實理論最大傳輸值為：每秒 2.5Mbyte/ 每秒625Kbyte的下載/上傳速度喔！<br>Intel的 i7-4790 CPU時脈為3.6GHz， 表示這顆CPU在一秒內可以進行3.6x109次工作</p>
+<h3 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h3><p> 隨機存取記憶體只有在通電時才能記錄與使用，斷電後資料就消失了。因此我們也稱這種RAM為揮發性記憶體。</p>
+<p> BIOS(Basic Input Output System)是一套程式，這套程式是寫死到主機板上面的一個記憶體晶片中， 這個記憶體晶片在沒有通電時也能夠將資料記錄下來，那就是唯讀記憶體(Read Only Memory, ROM)。</p>
+<h3 id="作業系統核心-Kernel"><a href="#作業系統核心-Kernel" class="headerlink" title="作業系統核心(Kernel)"></a>作業系統核心(Kernel)</h3><p>作業系統(Operating System, OS)其實也是一組程式， 這組程式的重點在於管理電腦的所有活動以及驅動系統中的所有硬體</p>
+<h3 id="发行版"><a href="#发行版" class="headerlink" title="发行版"></a>发行版</h3><p>這個『Kernel + Softwares + Tools + 可完整安裝程序』的咚咚，我們稱之為Linux distribution</p>
+<h3 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h3><p>要增加自己的體力，就是只有運動；要增加自己的知識，就只有讀書；當然，要增加自己對於Linux的認識， 大概就只有實作經驗了！</p>
+<p><a href="http://www.study-area.org" target="_blank" rel="noopener">Study-Area</a></p>
+<p><a href="http://phorum.vbird.org/viewtopic.php?t=96" target="_blank" rel="noopener">提问的智慧</a></p>
+<p>『在Linux系統中，每個裝置都被當成一個檔案來對待』</p>
+<h2 id="Linux-相关解释"><a href="#Linux-相关解释" class="headerlink" title="Linux 相关解释"></a>Linux 相关解释</h2><h3 id="磁盘命名"><a href="#磁盘命名" class="headerlink" title="磁盘命名"></a>磁盘命名</h3><p>SATA介面的硬碟的檔案名稱即為/dev/sd[a-d]，<br>其中， 括號內的字母為a-d當中的任意一個，亦即有/dev/sda, /dev/sdb, /dev/sdc,</p>
+<h3 id="磁盘启动"><a href="#磁盘启动" class="headerlink" title="磁盘启动"></a>磁盘启动</h3><p> 早期磁碟第一個磁區裡面含有的重要資訊我們稱為MBR (Master Boot Record) 格式。<br> 因此後來又多了一個新的磁碟分割格式，稱為 GPT (GUID partition table)！</p>
+<ul>
+<li>逻辑分区<br>如上圖右下方那個區塊有繼續分割出五個分割槽， 這五個由延伸分割繼續切出來的分割槽，就被稱為邏輯分割槽(logical partition)</li>
+</ul>
+<h3 id="启动区"><a href="#启动区" class="headerlink" title="启动区"></a>启动区</h3><p>第一個磁區 512bytes 會有這兩個資料：</p>
+<ul>
+<li>主要開機記錄區(Master Boot Record, MBR)：可以安裝開機管理程式的地方，有446 bytes</li>
+<li>分割表(partition table)：記錄整顆硬碟分割的狀態，有64 bytes<br>能夠被格式化後，作為資料存取的分割槽為主要分割與邏輯分割。延伸分割無法格式化；</li>
+</ul>
+<h3 id="开机流程"><a href="#开机流程" class="headerlink" title="开机流程"></a>开机流程</h3><ol>
+<li>BIOS：開機主動執行的韌體，會認識第一個可開機的裝置；</li>
+<li>MBR：第一個可開機裝置的第一個磁：一支可讀取核心檔案來執行的軟體；</li>
+<li>核心檔案：開始作業系統的功能…</li>
+</ol>
+<h3 id="挂载（mount）"><a href="#挂载（mount）" class="headerlink" title="挂载（mount）"></a>挂载（mount）</h3><p>所謂的『掛載』就是利用一個目錄當成進入點，將磁碟分割槽的資料放置在該目錄下； 也就是說，進入該目錄就可以讀取該分割槽的意思。</p>
+</div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>一肩月光</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/p/d5d2.html">https://www.wenboz.com/p/d5d2.html</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</li></ul></div><br><div class="tags"><a href="/tags/Linux/">Linux</a></div><div class="post-nav"><a class="pre" href="/p/34cb.html">我的2016</a><a class="next" href="/p/2f0e.html">从零开始构建单页应用 yarn+webpack+es6+vue</a></div><div id="lv-container" data-id="city" data-uid="MTAyMC80MTU1Ny8xODEwNA=="><script>(function(d, s) {
+   var j, e = d.getElementsByTagName(s)[0];
+   if (typeof LivereTower === 'function') { return; }
+   j = d.createElement(s);
+   j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+   j.async = true;
+   e.parentNode.insertBefore(j, e);
+})(document, 'script');
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/个人项目/">个人项目</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/健身/">健身</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/最优解/">最优解</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电影/">电影</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网站建设/">网站建设</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件/">软件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/追梦/" style="font-size: 15px;">追梦</a> <a href="/tags/好友/" style="font-size: 15px;">好友</a> <a href="/tags/生活方式/" style="font-size: 15px;">生活方式</a> <a href="/tags/重庆/" style="font-size: 15px;">重庆</a> <a href="/tags/健康/" style="font-size: 15px;">健康</a> <a href="/tags/日本/" style="font-size: 15px;">日本</a> <a href="/tags/五笔/" style="font-size: 15px;">五笔</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/老罗/" style="font-size: 15px;">老罗</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/正则表达式/" style="font-size: 15px;">正则表达式</a> <a href="/tags/深圳/" style="font-size: 15px;">深圳</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/游戏/" style="font-size: 15px;">游戏</a> <a href="/tags/路由器/" style="font-size: 15px;">路由器</a> <a href="/tags/Rails/" style="font-size: 15px;">Rails</a> <a href="/tags/游泳/" style="font-size: 15px;">游泳</a> <a href="/tags/电影/" style="font-size: 15px;">电影</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Atom/" style="font-size: 15px;">Atom</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/木心/" style="font-size: 15px;">木心</a> <a href="/tags/下载/" style="font-size: 15px;">下载</a> <a href="/tags/年记/" style="font-size: 15px;">年记</a> <a href="/tags/爬虫/" style="font-size: 15px;">爬虫</a> <a href="/tags/VuePress/" style="font-size: 15px;">VuePress</a> <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/西宁onLine/" style="font-size: 15px;">西宁onLine</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://blog.21w.space" title="贰十一万" target="_blank">贰十一万</a><ul></ul><a href="http://tengblog.com/" title="马腾的博客" target="_blank">马腾的博客</a><ul></ul><a href="http://cyang.tech/" title="cyang's blog" target="_blank">cyang's blog</a><ul></ul><a href="https://blog.helbing.cn/" title="helbing's blog" target="_blank">helbing's blog</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">一肩月光.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script>(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://s95.cnzz.com/z_stat.php?id=1260247646&web_id=1260247646";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
