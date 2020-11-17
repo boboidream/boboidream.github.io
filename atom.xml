@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.wenboz.com/"/>
-  <updated>2020-06-18T08:34:01.253Z</updated>
+  <updated>2020-11-17T08:32:20.777Z</updated>
   <id>https://www.wenboz.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>VuePress自动化部署从travis到Github Actions</title>
+    <link href="https://www.wenboz.com/p/912.html"/>
+    <id>https://www.wenboz.com/p/912.html</id>
+    <published>2020-11-17T07:19:18.000Z</published>
+    <updated>2020-11-17T08:32:20.777Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/img/2020-11-17-0.jpg" alt="pretty"></p><p>用 travis 自动化部署 VuePress 之前一直挺稳定，但稍微有点慢 5min 左右，最近偶尔需要 <code>Queued</code> 近半小时。不能忍，切换为 Github Actions 后，从 push 到编译完成，仅仅 2 min，不得不感慨「微软大法好」。</p><p>还是记录一下切换过程。</p><h2 id="travis-方式"><a href="#travis-方式" class="headerlink" title="travis 方式"></a>travis 方式</h2><p>之前在 <a href="https://travis-ci.com/" target="_blank" rel="noopener">travis-ci</a> 平台的配置文件 <code>.travis.yml</code></p><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">language:</span> <span class="string">node_js</span></span><br><span class="line"><span class="attr">node_js:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">lts/*</span></span><br><span class="line"><span class="attr">install:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">npm</span> <span class="string">install</span></span><br><span class="line"><span class="attr">cache:</span></span><br><span class="line"><span class="attr">  directories:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">"node_modules"</span></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">npm</span> <span class="string">run</span> <span class="string">build</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  provider:</span> <span class="string">pages</span></span><br><span class="line"><span class="attr">  skip-cleanup:</span> <span class="literal">true</span> </span><br><span class="line"><span class="attr">  local_dir:</span> <span class="string">docs/.vuepress/dist</span></span><br><span class="line"><span class="attr">  github-token:</span> <span class="string">$GITHUB_TOKEN</span> <span class="comment"># a token generated on github allowing travis to push code on you repository</span></span><br><span class="line"><span class="attr">  keep-history:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  fqdn:</span> <span class="string">note.wenboz.com</span></span><br><span class="line"><span class="attr">  on:</span></span><br><span class="line"><span class="attr">    branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure><p>其中 <code>GITHUB_TOKEN</code> 变量为 Personal access token。</p><p><img src="/img/2020-11-17-1.png" alt="GITHUB_TOKEN"></p><h2 id="Github-Actions-方式"><a href="#Github-Actions-方式" class="headerlink" title="Github Actions 方式"></a>Github Actions 方式</h2><h3 id="步骤一：配置-Personal-access-token"><a href="#步骤一：配置-Personal-access-token" class="headerlink" title="步骤一：配置 Personal access token"></a>步骤一：配置 Personal access token</h3><p>可参考 <a href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token" target="_blank" rel="noopener">Creating a personal access token</a> 给这么多权限就够用了。</p><p><img src="/img/2020-11-17-2.png" alt="Personal access token 配置">)</p><p>之后在 repo 的 Settings 里配 Secrets，可命名为 <code>ACCESS_TOKEN</code>，与之后配置文件中变量名保持一致。</p><h3 id="步骤二：配置-workflows-文件"><a href="#步骤二：配置-workflows-文件" class="headerlink" title="步骤二：配置 workflows 文件"></a>步骤二：配置 workflows 文件</h3><p>我们可直接采用开发者 jenkey2011 编写好的 Action 脚本，在这里感谢 <a href="https://github.com/jenkey2011" target="_blank" rel="noopener">jenkey2011</a> 无私分享！</p><p>在根目录创建 <code>.github/workflows/vuepress-deploy.yml</code> 文件，由于我的需求是将编译后内容发布到 <code>gh-pages</code>，我的配置是这样的</p><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">A</span> <span class="string">TO</span> <span class="attr">A:GH_PAGES</span></span><br><span class="line"><span class="attr">on:</span> <span class="string">[push]</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line"><span class="attr">  build-and-deploy:</span></span><br><span class="line"><span class="attr">    runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line"><span class="attr">    steps:</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">Checkout</span></span><br><span class="line"><span class="attr">      uses:</span> <span class="string">actions/checkout@master</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">Build</span> <span class="string">and</span> <span class="string">Deploy</span></span><br><span class="line"><span class="attr">      uses:</span> <span class="string">jenkey2011/vuepress-deploy@master</span></span><br><span class="line"><span class="attr">      env:</span></span><br><span class="line"><span class="attr">        ACCESS_TOKEN:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.ACCESS_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line"><span class="attr">        TARGET_BRANCH:</span> <span class="string">gh-pages</span></span><br><span class="line"><span class="attr">        BUILD_SCRIPT:</span> <span class="string">yarn</span> <span class="string">&amp;&amp;</span> <span class="string">yarn</span> <span class="string">build</span></span><br><span class="line"><span class="attr">        BUILD_DIR:</span> <span class="string">docs/.vuepress/dist/</span></span><br></pre></td></tr></table></figure><p>只有一处需要注意，<code>BUILD_DIR</code> 的地址就是从根目录出发，build 生成 HTML 页面的文件夹，也是提交到 <code>gh-pages</code> 分支的文件。</p><p>git push 后就可以到 repo 的 Actions 里查看成果了！</p><p><img src="/img/2020-11-17-3.png" alt="编译成功">)</p><hr><p>我是用 <a href="https://vercel.com/" target="_blank" rel="noopener">Vercel</a> 托管的 VuePress，我们不需要 Vercel 再帮我们编译 VuePress，只需要 Override 一下 Build Command 就好了。</p><p><img src="/img/2020-11-17-4.png" alt="关闭 Vercel 自动编译">)</p><p>如图，同时我们要设置展示的 repo 分支为 <code>gh-pages</code>。</p><p><img src="/img/2020-11-17-5.png" alt="设置产品分支">)</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;/img/2020-11-17-0.jpg&quot; alt=&quot;pretty&quot;&gt;&lt;/p&gt;
+&lt;p&gt;用 travis 自动化部署 VuePress 之前一直挺稳定，但稍微有点慢 5min 左右，最近偶尔需要 &lt;code&gt;Queued&lt;/code&gt; 近半小时。不能忍，
+      
+    
+    </summary>
+    
+      <category term="网站建设" scheme="https://www.wenboz.com/categories/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/"/>
+    
+    
+      <category term="VuePress" scheme="https://www.wenboz.com/tags/VuePress/"/>
+    
+  </entry>
   
   <entry>
     <title>使用RGB渲染解决macOS(Catalina)外接显示器字体模糊问题</title>
@@ -511,35 +537,6 @@
     
       <category term="网站建设" scheme="https://www.wenboz.com/categories/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>利用 VLAN 单线复用 Internet 与 IPTV</title>
-    <link href="https://www.wenboz.com/p/8690.html"/>
-    <id>https://www.wenboz.com/p/8690.html</id>
-    <published>2018-10-11T06:38:46.000Z</published>
-    <updated>2020-06-18T02:19:42.575Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/img/2018-10-11-0.jpg" alt="夕"></p><p>本方案用于一根网线连接电信猫与路由器，IPTV 连接路由器可正常使用。</p><p>准备条件：</p><ol><li>获取电信猫管理员密码，可联系电信安装师傅获取。</li><li>路由器支持 VLAN</li></ol><p>本人设备：</p><ol><li>南京电信宽带</li><li>光猫：天邑 <a href="http://surfing.hicdma.com/prodetailnetbook.do?pro_id=88402&amp;protype=tablets" target="_blank" rel="noopener">TEWA-700G</a></li><li>路由器：RT-AC66U B1；系统 380.68_4-X7.7</li></ol><h2 id="一、连接方式"><a href="#一、连接方式" class="headerlink" title="一、连接方式"></a>一、连接方式</h2><p><img src="/img/2018-10-11-1.png" alt="布线"></p><h2 id="二、设置电信猫"><a href="#二、设置电信猫" class="headerlink" title="二、设置电信猫"></a>二、设置电信猫</h2><ol><li><p>Internet 网络设置里取消所有端口绑定<br><img src="/img/2018-10-11-2.png" alt="取消端口绑定"></p></li><li><p>IPTV 网络设置里取消所有端口绑定<br><img src="/img/2018-10-11-3.png" alt="取消端口绑定"></p></li><li><p>将 Internet 与 IPTV 网络，通过 VLAN 方式绑定到同一个端口<br><img src="/img/2018-10-11-4.png" alt="绑定 VLAN"></p></li></ol><h2 id="三、设置路由器"><a href="#三、设置路由器" class="headerlink" title="三、设置路由器"></a>三、设置路由器</h2><p>使用 ssh 方式登录路由器。<br>输入：<code>robocfg</code>，会出现 <code>robocfg</code> 工具的帮助信息。</p><ol><li><p>搞清楚路由器物理端口的端口号<br>我通过将 Internet 网线不断切换端口，然后通过路由器后台（或命令 <code>robocfg show</code>） Tools 查看端口网络情况。<br><img src="/img/2018-10-11-5.png" alt="端口号"></p></li><li><p>规划路由器上 VLAN 分布<br>根据电信猫上填写的用户侧的 VLAN 值，vlan 43 为 IPTV 网络，vlan 231 为 Internet 网络，vlan 1 为默认。</p></li></ol><p>端口 0 为 WAN 端口；端口 5 为路由器 CPU；端口 4 用作 IPTV；其他端口用作 Internet。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  1: vlan1: 1 2 3 5</span><br><span class="line"> 43: vlan43: 0t 4</span><br><span class="line">231: vlan231: 0 5</span><br></pre></td></tr></table></figure><p>注意，这里 0t 的意思，猜测是不处理从猫传来的 tag 标签，因为 IPTV 需要验证这个 vlan  tag。</p><ol start="3"><li>进行 vlan 配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">robocfg vlans reset vlan 1 ports &quot;1 2 3 5t&quot; vlan 43 ports &quot;0t 4u&quot; vlan 231 ports &quot;0u 5u&quot;</span><br></pre></td></tr></table></figure></li></ol><p>查看 vlan 分布是否符合预期 <code>robocfg show</code></p><p>测试 IPTV、Internet 网络是否都正常。假如正常，则将这条命令写入开机启动文件 <code>/jffs/scripts/services-start</code>。</p><p>End.</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;/img/2018-10-11-0.jpg&quot; alt=&quot;夕&quot;&gt;&lt;/p&gt;
-&lt;p&gt;本方案用于一根网线连接电信猫与路由器，IPTV 连接路由器可正常使用。&lt;/p&gt;
-&lt;p&gt;准备条件：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;获取电信猫管理员密码，可联系电信安装师傅获取。&lt;/l
-      
-    
-    </summary>
-    
-      <category term="最优解" scheme="https://www.wenboz.com/categories/%E6%9C%80%E4%BC%98%E8%A7%A3/"/>
-    
-    
-      <category term="路由器" scheme="https://www.wenboz.com/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/"/>
     
   </entry>
   
